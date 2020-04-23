@@ -27,6 +27,14 @@ Machine learning is critical helping different organizations understanding which
 
 ## Local Development
 
+
+* Open Anaconda Prompt
+* (shiny_new_env)$ conda deactivate # exit the current venv
+* conda create -n disaster_response python=3.7 # Activate it
+* conda activate disaster_response 
+* pip install -r requirements.txt # Install packages from requirements.txt
+* You might also try  conda install -r requirements.txt if pip installation conflicts are giving you trouble.
+
 1. Run the following commands in the project's root directory to set up your database and model.
 
     - To run ETL pipeline that cleans data and stores in database
@@ -34,10 +42,10 @@ Machine learning is critical helping different organizations understanding which
     - To run ML pipeline that trains classifier and saves
         `python models/train_classifier.py data/disaster_response.db models/model.pkl`
         
-    2. Run the following command in the app's directory to run your web app.
+    1. Run the following command in the app's directory to run your web app.
         cd ap
 
-3. Go to http://localhost:3001/
+2. Go to http://localhost:3001/
 
 ## Project structure description
 

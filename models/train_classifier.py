@@ -96,7 +96,7 @@ def build_model():
                         ('vect', CountVectorizer(tokenizer=partial(tokenize))),
                         ('tfidf', TfidfTransformer()),
                         ('clf', MultiOutputClassifier(
-                            estimator=RandomForestClassifier(verbose=1)))
+                            estimator=RandomForestClassifier(verbose=2)))
                         ])
 
     # parameters = {
@@ -150,10 +150,7 @@ def save_model(model, filepath):
     print("Model has been succesfully saved!")
 
 
-# def main():
-# https://github.com/scikit-learn/scikit-learn/issues/10533
-
-if __name__ == '__main__':
+def main():
     if len(sys.argv) == 3:
         database_filepath, model_filepath = sys.argv[1:]
         print('Loading data...\n    DATABASE: {}'.format(database_filepath))
@@ -161,15 +158,14 @@ if __name__ == '__main__':
         X_train, X_test, Y_train, Y_test = train_test_split(
             X, Y, test_size=0.2)
 
-        with parallel_backend('multiprocessing'):
-            print('Building model...')
-            model = build_model()
+        print('Building model...')
+        model = build_model()
 
-            print('Training model...')
-            model.fit(X_train, Y_train)
+        print('Training model...')
+        model.fit(X_train, Y_train)
 
-            print('Evaluating model...')
-            evaluate_model(model, X_test, Y_test, category_names)
+        print('Evaluating model...')
+        evaluate_model(model, X_test, Y_test, category_names)
 
         print('Saving model...\n    MODEL: {}'.format(model_filepath))
         save_model(model, model_filepath)
@@ -181,3 +177,8 @@ if __name__ == '__main__':
               'as the first argument and the filepath of the pickle file to '
               'save the model to as the second argument. \n\nExample: python '
               'train_classifier.py ../data/DisasterResponse.db classifier.pkl')
+# https://github.com/scikit-learn/scikit-learn/issues/10533
+
+
+if __name__ == '__main__':
+    main()
